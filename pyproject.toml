@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "descarga-tabuladores"
+name = "descarga_tabuladores"
 authors = [
     {name = "Rodrigo Leo", email = "rodrigo.leo@bbva.com"},
 ]
