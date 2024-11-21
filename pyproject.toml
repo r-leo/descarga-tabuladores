@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "descarga-tabuladores"
+authors = [
+    {name = "Rodrigo Leo", email = "rodrigo.leo@bbva.com"},
+]
+dependencies = [
+    "requests",
+    "openpyxl"
+]
