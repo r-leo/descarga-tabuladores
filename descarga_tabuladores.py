@@ -46,11 +46,11 @@ def tabulado(anio, mes):
   
   # Leer archivo temporal y extraer de acuerdo al mapeo
   wb = load_workbook('temp_data.xlsx')
-  resultado = []
+  resultado = [f'20{str(anio).zfill(4)[-2:]}-{str(mes).zfill(2)}']
   for variable in mapeo.keys():
     valor = wb['1.1'][mapeo[variable]].value
-    resultado.append([variable, valor])
-  df = pd.DataFrame(resultado, columns = ['Variable', 'Valor'])
+    resultado.append(valor)
+  df = pd.DataFrame(resultado, columns = ['Periodo'] + list(mapeo.keys()))
   
   # Eliminar archivo temporal
   remove('temp_data.xlsx')
@@ -84,5 +84,5 @@ def tabulados(anio_inicial, mes_inicial, anio_final, mes_final):
   for periodo in periodos(anio_inicial, mes_inicial, anio_final, mes_final):
     df = tabulado(*periodo)
     dataframes.append(df)
-  resultado = pd.concat(dataframes, ignore_index = True)
+  resultado = pd.concat(dataframes, ignore_index = True).sort_values('Periodo', ascending = True)
   return resultado
