@@ -3,6 +3,7 @@ import pandas as pd
 from openpyxl import load_workbook
 from os import remove
 
+
 mapeo = {
   'Población total': 'M11',
   'PEA': 'M12',
@@ -23,8 +24,14 @@ mapeo = {
   'Ingreso (pesos) por hora trabajada de la población ocupada (trabajadores subordinados y remunerados con percepciones no salariales) (mediana)': 'M277',
 }
 
-def tabulados(anio, mes):
 
+def tabulado(anio, mes):
+  """Descarga un único tabulado y lo devuelve como un DataFrame de pandas.
+
+    Argumentos:
+    anio -- el año del periodo a descargar (entero)
+    mes  -- el mes del periodo a descargar (entero: 1, 2, ..., 12)
+    """
   # Construir periodo (MMAA)
   periodo = str(mes).zfill(2) + str(anio).zfill(4)[-2:]
 
@@ -49,3 +56,20 @@ def tabulados(anio, mes):
   remove('temp_data.xlsx')
 
   return df
+
+
+def periodos(anio_inicial, mes_inicial, anio_final, mes_final):
+  if anio_inicial == anio_final:
+    periodos = [(anio_inicial, m) for m in range(mes_inicial, mes_final + 1)]
+  elif anio_final == anio_inicial + 1:
+    periodos = [(anio_inicial, m) for m in range(mes_inicial, 13)] + [(anio_final, m) for m in range (1, mes_final + 1)]
+  else:
+    periodos = [(anio_inicial, m) for m in range(mes_inicial, 13)]
+    for y in range(anio_inicial + 1, anio_final):
+      periodos = periodos + [(y, m) for m in range(1, 13)]
+    periodos = periodos + [(anio_final, m) for m in range (1, mes_final + 1)]
+  return periodos
+
+
+def tabulados(anio_inicial, mes_inicial, anio_final, mes_final):
+  return None
