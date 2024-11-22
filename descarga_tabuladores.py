@@ -50,7 +50,7 @@ def tabulado(anio, mes):
   for variable in mapeo.keys():
     valor = wb['1.1'][mapeo[variable]].value
     resultado.append(valor)
-  df = pd.DataFrame(resultado, columns = ['Periodo'] + list(mapeo.keys()))
+  df = pd.DataFrame([resultado], columns = ['Periodo'] + list(mapeo.keys()))
   
   # Eliminar archivo temporal
   remove('temp_data.xlsx')
