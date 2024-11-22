@@ -72,4 +72,17 @@ def periodos(anio_inicial, mes_inicial, anio_final, mes_final):
 
 
 def tabulados(anio_inicial, mes_inicial, anio_final, mes_final):
-  return None
+  """Descarga un conjunto de tabulados y los devuelve como un DataFrame de pandas.
+
+    Argumentos:
+    anio_inicial -- el año del periodo inicial a descargar (entero)
+    mes_inicial  -- el mes del periodo inicial a descargar (entero: 1, 2, ..., 12)
+    anio_final -- el año del periodo final a descargar (entero)
+    mes_final  -- el mes del periodo final a descargar (entero: 1, 2, ..., 12)
+    """
+  dataframes = []
+  for periodo in periodos(anio_inicial, mes_inicial, anio_final, mes_final):
+    df = tabulado(*periodo)
+    dataframes.append(df)
+  resultado = pd.concat(dataframes, ignore_index = True)
+  return resultado
