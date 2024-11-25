@@ -4,6 +4,9 @@ from openpyxl import load_workbook
 from os import remove
 
 
+pd.set_option('display.max_colwidth', None)
+
+
 mapeo = {
   'Población total': 'M11',
   'PEA': 'M12',
